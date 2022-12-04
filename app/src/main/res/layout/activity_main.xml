@@ -10,7 +10,7 @@
         android:id="@+id/tvFiltrarFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="163dp"
         android:text="@string/tvFiltroFecha"
@@ -30,9 +30,9 @@
 
     <Spinner
         android:id="@+id/spFiltroFecha"
-        android:layout_width="111dp"
-        android:layout_height="19dp"
-        android:layout_marginStart="16dp"
+        android:layout_width="125dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="148dp"
         app:layout_constraintEnd_toStartOf="@+id/spFiltroCat"
@@ -41,8 +41,8 @@
 
     <Spinner
         android:id="@+id/spFiltroCat"
-        android:layout_width="111dp"
-        android:layout_height="19dp"
+        android:layout_width="125dp"
+        android:layout_height="34dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,8 +50,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovimientos"
-        android:layout_width="413dp"
-        android:layout_height="451dp"
+        android:layout_width="411dp"
+        android:layout_height="413dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="1dp"

@@ -107,8 +107,8 @@
 
     <Spinner
         android:id="@+id/spCategoria"
-        android:layout_width="157dp"
-        android:layout_height="48dp"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
         android:layout_marginStart="125dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="28dp"
@@ -141,27 +141,17 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/tvLocate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/tvLocalizacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvImporte" />
-
     <EditText
         android:id="@+id/ptLocate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="35dp"
         android:layout_marginTop="11dp"
         android:layout_marginEnd="90dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvLocate"
+        app:layout_constraintStart_toEndOf="@+id/btLocate"
         app:layout_constraintTop_toBottomOf="@+id/ptImporte"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -170,10 +160,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="87dp"
         android:text="@string/tvFoto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLocate" />
+        tools:layout_editor_absoluteY="469dp" />
 
     <ImageView
         android:id="@+id/btnPhoto"
@@ -201,5 +190,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptLocate"
         tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/btLocate"
+        android:layout_width="103dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/tvLocalizacion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvImporte" />
+
+    <Button
+        android:id="@+id/btAddCate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="48dp"
+        android:text="@string/btCate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/spCategoria" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,11 +7,12 @@
     <string name="tvGasto">Gasto</string>
     <string name="tvFecha">Fecha</string>
     <string name="tvCategoria">Categoria</string>
+    <string name="btCate">+ Cate</string>
     <string name="tvTipo">Tipo de Movimiento</string>
     <string name="rbIngreso">Ingreso</string>
     <string name="rbGasto">Gasto</string>
     <string name="tvImporte">Importe</string>
-    <string name="tvLocalizacion">Localización</string>
+    <string name="tvLocalizacion">Locate</string>
     <string name="tvFoto">Foto Recibo</string>
     <string name="btnCrear">Crear</string>
 </resources>
