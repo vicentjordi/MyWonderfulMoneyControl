@@ -13,7 +13,7 @@ class miSQLiteHelper(context: Context) : SQLiteOpenHelper(
                 "(_id STRING PRIMARY KEY AUTOINCREMENT," +
                 "gasto TEXT NOT NULL, fecha DATE NOT NULL, " +
                 "tipo TEXT NOT NULL, categoria TEXT NOT NULL, " +
-                "importe TEXT NOT NULL, location TEXT, img TEXT)"
+                "importe TEXT NOT NULL, longitude TEXT, latitude TEXT, img TEXT)"
 
         db!!.execSQL(ordenCreacion)
     }//onCreate
