@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         verPermisos()
     }//end_OnCreate
 
-    fun verPermisos(){
+    private fun verPermisos(){
         if ((ContextCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
                     PackageManager.PERMISSION_GRANTED

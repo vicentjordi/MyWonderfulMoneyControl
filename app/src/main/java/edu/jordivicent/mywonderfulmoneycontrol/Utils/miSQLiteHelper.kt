@@ -10,10 +10,7 @@ class miSQLiteHelper(context: Context) : SQLiteOpenHelper(
     context,"moneyControl.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val  ordenCreacion = "CREATE TABLE IF NOT EXISTS categoria " +
-                "(_id STRING PRIMARY KEY AUTOINCREMENT," +
-                "gasto TEXT NOT NULL, fecha DATE NOT NULL, " +
-                "tipo TEXT NOT NULL, categoria TEXT NOT NULL, " +
-                "importe TEXT NOT NULL, longitude TEXT, latitude TEXT, img TEXT)"
+                "(categoria TEXT PRIMARY KEY AUTOINCREMENT)"
 
         db!!.execSQL(ordenCreacion)
     }//onCreate

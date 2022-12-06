@@ -6,57 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".activity_Movimiento">
 
-    <TextView
-        android:id="@+id/tvGasto"
-        android:layout_width="47dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/tvGasto"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/ptGasto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/ptGasto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="122dp"
         android:ems="10"
+        android:hint="@string/rbGasto"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/tvFecha"
-        android:layout_width="45dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/tvFecha"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/ptFecha"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGasto" />
 
     <EditText
         android:id="@+id/ptFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="121dp"
+        android:clickable="false"
         android:ems="10"
-        android:enabled="false"
+        android:focusable="false"
+        android:hint="@string/tvFecha"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptGasto"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -118,28 +97,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCategoria"
         tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/tvImporte"
-        android:layout_width="67dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="35dp"
-        android:text="@string/tvImporte"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
     <EditText
         android:id="@+id/ptImporte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="27dp"
-        android:layout_marginEnd="76dp"
+        android:layout_marginEnd="120dp"
         android:ems="10"
+        android:hint="@string/tvImporte"
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvImporte"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
@@ -175,10 +144,10 @@
         android:layout_width="103dp"
         android:layout_height="42dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="11dp"
         android:text="@string/tvLocalizacion"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvImporte" />
+        app:layout_constraintTop_toBottomOf="@+id/ptImporte" />
 
     <Button
         android:id="@+id/btAddCate"
