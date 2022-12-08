@@ -1,7 +1,7 @@
 package edu.jordivicent.mywonderfulmoneycontrol
 
 import android.Manifest
-import android.app.DatePickerDialog
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.sqlite.SQLiteDatabase
@@ -9,25 +9,16 @@ import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
-import android.widget.AdapterView
+import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Spinner
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.LatLng
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.DatePickerFragment
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.miSQLiteHelper
-import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMainBinding
 import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMovimientoBinding
 import java.util.*
 
@@ -69,7 +60,7 @@ class activity_Movimiento : AppCompatActivity() {
             camaraLauncher.launch(intent)
         }//end_foto
         binding.ptFecha.setOnClickListener{selectorFecha()}//end_fecha
-        binding.btAddCate.setOnClickListener(addcategoria())
+        binding.btAddCate.setOnClickListener{addCategoria()}
         binding.btnCrear.setOnClickListener{crearMovimiento()}//end_crear
 
     }
@@ -129,9 +120,33 @@ class activity_Movimiento : AppCompatActivity() {
 
     }//end_cargarCate
 
-    private fun addcategoria(){
-
-    }
+    private fun addCategoria(){
+        //Crear dialog
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        //Usar la layout anyadir_categoria
+        val dialogLayout = inflater.inflate(R.layout.anyadir_categoria, null)
+        //obtener el editText de la layout anyadir_categoria
+        val etNuevaCat = dialogLayout.findViewById<EditText>(R.id.et_nuevaCategoria)
+        //Creamos el dialog con el builder
+        with (builder) {
+            setTitle("Nueva Categoria")
+            setPositiveButton("Aceptar"){dialog, wich ->
+                if(!etNuevaCat.text.isNullOrBlank()){
+                    //si el etNuevaCat no esta vacia se añade a la base de datos
+                    moneyControlDB.anyadirCategoria(etNuevaCat.text.toString())
+                    //Acutalizamos el spinner de categoria
+                    cargarCate()
+                }
+            }
+            setNegativeButton("Cancel"){dialog, wich ->
+                Log.d("Movimiento", "Se ha cancelado la operación ")
+            }
+            //Mostrar el dialog
+            setView(dialogLayout)
+            show()
+        }//endWith
+    }//end_addCategoria
     private fun crearMovimiento(){
 
     }//end_crearMovimiento

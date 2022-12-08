@@ -15,4 +15,6 @@
     <string name="tvLocalizacion">Locate</string>
     <string name="tvFoto">Foto Recibo</string>
     <string name="btnCrear">Crear</string>
+    <!-- anyadir-categoria layout -->
+    <string name="etNueva">Nueva Categoria</string>
 </resources>
