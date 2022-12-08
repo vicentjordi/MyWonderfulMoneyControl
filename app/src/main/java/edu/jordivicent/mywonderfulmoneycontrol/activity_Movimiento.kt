@@ -4,10 +4,14 @@ import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -23,11 +27,14 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.DatePickerFragment
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.miSQLiteHelper
+import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMainBinding
+import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMovimientoBinding
 import java.util.*
 
 class activity_Movimiento : AppCompatActivity() {
     lateinit var moneyControlDB: miSQLiteHelper
     private lateinit var fusedLocation: FusedLocationProviderClient
+    private lateinit var binding : ActivityMovimientoBinding
 
     //Crear launcher para la activity de la camara
     private val camaraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult->
@@ -45,33 +52,30 @@ class activity_Movimiento : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movimiento)
 
+        binding=ActivityMovimientoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         moneyControlDB = miSQLiteHelper(this)
-
-        //Asignar UI
-        var crear = findViewById(R.id.btnCrear) as Button
-        var locate = findViewById(R.id.btLocate) as Button
-        var foto = findViewById(R.id.btnFoto) as Button
-        var fecha = findViewById(R.id.ptFecha) as EditText
-
+        cargarCate()
 
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
         //Funciones botones
-        locate.setOnClickListener{locateMe()}//End_locate
-        foto.setOnClickListener{
+        binding.btLocate.setOnClickListener{locateMe()}//End_locate
+        binding.btnFoto.setOnClickListener{
             //Crear Intent camara
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             //Ejecutar camaraLauncher
             camaraLauncher.launch(intent)
         }//end_foto
-        fecha.setOnClickListener{selectorFecha()}//end_fecha
-        crear.setOnClickListener{crearMovimiento()}//end_crear
+        binding.ptFecha.setOnClickListener{selectorFecha()}//end_fecha
+        binding.btAddCate.setOnClickListener(addcategoria())
+        binding.btnCrear.setOnClickListener{crearMovimiento()}//end_crear
 
     }
-    private fun locateMe(){
-        var longitud = findViewById(R.id.ptLong) as EditText
-        var latiud = findViewById(R.id.ptLat) as EditText
 
+
+    private fun locateMe(){
         //Comprovar perimisos de Localizacion
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -83,13 +87,14 @@ class activity_Movimiento : AppCompatActivity() {
         ) {
             return
         }
+
         fusedLocation.lastLocation.addOnSuccessListener { location ->
             //Comprobar si location es null
             if (location != null) {
                 //Pone la latitud
-                latiud.setText(location.latitude.toString())
+                binding.ptLat.setText(location.latitude.toString())
                 //Pone la Longitud
-                longitud.setText((location.longitude.toString()))
+                binding.ptLong.setText((location.longitude.toString()))
             }
         }//end_fusedLocation
     }//end_locateMe
@@ -100,37 +105,35 @@ class activity_Movimiento : AppCompatActivity() {
     }//end_SelectorFecha
 
     fun onDateSelected(day:Int, month:Int, year:Int){
-        var ptfecha = findViewById(R.id.ptFecha) as EditText
-        ptfecha.setText("$day/$month/$year")
+        binding.ptFecha.setText("$day/$month/$year")
     }//end_onDateSelected
 
-    private fun crearMovimiento(){
-        var titulo = findViewById(R.id.ptGasto) as EditText
-        var fecha = findViewById(R.id.ptFecha) as EditText
-        var ingreso = findViewById(R.id.rbIngreso) as RadioButton
-        var gasto = findViewById(R.id.rbGasto) as RadioButton
-        var importe = findViewById(R.id.ptImporte) as EditText
-        var rbgroup = findViewById(R.id.radioGroup) as RadioGroup
-        var categoria = findViewById(R.id.spCategoria) as Spinner
-        var locate = findViewById(R.id.ptLong) as EditText
-        var recibo = findViewById(R.id.imgFoto) as ImageView
+    private fun cargarCate(){
+        var category: MutableList<String> = ArrayList()
+        val db : SQLiteDatabase = moneyControlDB.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM categoria", null)
 
-        //Comprovamos si los principales campos estan vacios
-        if(titulo.text.isNotBlank() && fecha.text.isNotBlank() && rbgroup.checkedRadioButtonId !=-1
-            && categoria.selectedItem != null && importe.text.isNotBlank()){
+        //Si la tabla tiene datos, mostrara los datos
+        if(cursor.moveToFirst()){
+            println("NO Empty")
+            do{
+                //Añade la string donde esta el cursor a la lista
+                category.add(cursor.getString(0).toString())
+            }while (cursor.moveToNext())
+            println(category.size)
+            //Adaptador para que el spinner sea un dropdawn y carge los items de la lista
+            val arrayAdapter = ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, category)
+            //Aplicamos el filtro sobre el adaptador
+            binding.spCategoria.adapter=arrayAdapter
+        }//end_if
 
-            //si no estan vacios comprobaremos los opcionales
-            if(locate.text.isBlank()){
-                //si está vacio sera null
-            }
-            if(recibo.getDrawable()==null){
-                //si es esta vacio imgDefoult
-            }
+    }//end_cargarCate
 
-            //Una vez comprovados se añadiran a la tabla
-        }else{
-            //Mostrar Mensaje error en caso de que algun campo obligatoio este vacio
-        }
+    private fun addcategoria(){
+
     }
+    private fun crearMovimiento(){
 
-}
+    }//end_crearMovimiento
+
+}//end_activityMovimiento

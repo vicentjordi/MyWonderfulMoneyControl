@@ -9,19 +9,19 @@ class miSQLiteHelper(context: Context) : SQLiteOpenHelper(
 
     context,"moneyControl.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
-        val  ordenCreacion = "CREATE TABLE IF NOT EXISTS categoria " +
-                "(categoria TEXT PRIMARY KEY AUTOINCREMENT)"
+        val  createCate = "CREATE TABLE IF NOT EXISTS categoria " +
+                "(categoria TEXT PRIMARY KEY)"
 
-        db!!.execSQL(ordenCreacion)
+        db!!.execSQL(createCate)
     }//onCreate
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion1: Int, newVersion2: Int) {
-        val ordenBorrado = "DROP TABLE IF EXISTS categoria"
-        db!!.execSQL(ordenBorrado)
+        val delCate = "DROP TABLE IF EXISTS categoria"
+        db!!.execSQL(delCate)
         onCreate(db)
     } // on Upgrade
 
-    fun anyadirMovimiento(categoria: String){
+    fun anyadirCategoria(categoria: String){
         val datos = ContentValues()
         datos.put("categoria", categoria)
         datos
@@ -30,6 +30,6 @@ class miSQLiteHelper(context: Context) : SQLiteOpenHelper(
         db.insert("categoria", null, datos)
 
         db.close()
-    }//end_anyadirMovimiento
+    }//end_anyadirCategoria
 
 }
