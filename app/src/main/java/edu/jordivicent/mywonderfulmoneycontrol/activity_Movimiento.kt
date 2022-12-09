@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,17 +16,20 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.DatePickerFragment
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.miSQLiteHelper
 import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMovimientoBinding
+import java.io.ByteArrayOutputStream
 import java.util.*
 
 class activity_Movimiento : AppCompatActivity() {
     lateinit var moneyControlDB: miSQLiteHelper
     private lateinit var fusedLocation: FusedLocationProviderClient
     private lateinit var binding : ActivityMovimientoBinding
+
 
     //Crear launcher para la activity de la camara
     private val camaraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ activityResult->
@@ -34,11 +38,11 @@ class activity_Movimiento : AppCompatActivity() {
             val intent = activityResult.data
             //Convertir los datos de intent en Bitmap
             val imageBitmap = intent?.extras?.get("data") as Bitmap
-            val img = findViewById<ImageView>(R.id.imgFoto)
+            val img = binding.imgFoto
             //Poner la imagen hecha en el ImageView
             img.setImageBitmap(imageBitmap)
         }
-    }
+    }//end_camaraLauncher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movimiento)
@@ -63,9 +67,7 @@ class activity_Movimiento : AppCompatActivity() {
         binding.btAddCate.setOnClickListener{addCategoria()}
         binding.btnCrear.setOnClickListener{crearMovimiento()}//end_crear
 
-    }
-
-
+    }//end_OnCreate
     private fun locateMe(){
         //Comprovar perimisos de Localizacion
         if (ActivityCompat.checkSelfPermission(
@@ -89,16 +91,13 @@ class activity_Movimiento : AppCompatActivity() {
             }
         }//end_fusedLocation
     }//end_locateMe
-
     private fun selectorFecha(){
         val datePicker = DatePickerFragment{day, month, year -> onDateSelected(day, month, year)}
         datePicker.show(supportFragmentManager, "datePicker")
     }//end_SelectorFecha
-
     fun onDateSelected(day:Int, month:Int, year:Int){
         binding.ptFecha.setText("$day/$month/$year")
     }//end_onDateSelected
-
     private fun cargarCate(){
         var category: MutableList<String> = ArrayList()
         val db : SQLiteDatabase = moneyControlDB.readableDatabase
@@ -119,7 +118,6 @@ class activity_Movimiento : AppCompatActivity() {
         }//end_if
 
     }//end_cargarCate
-
     private fun addCategoria(){
         //Crear dialog
         val builder = AlertDialog.Builder(this)
@@ -148,6 +146,35 @@ class activity_Movimiento : AppCompatActivity() {
         }//endWith
     }//end_addCategoria
     private fun crearMovimiento(){
+        //Comprobar que los campos principales no esten vacios
+        if(!binding.ptGasto.text.isNullOrBlank() && !binding.ptFecha.text.isNullOrBlank() && !binding.ptImporte.text.isNullOrBlank()){
+
+           if(binding.radioGroup.checkedRadioButtonId==-1){
+               //Comprobar que los campos Latitud y longitud no esten vacio
+               if(binding.ptLat.text.isNullOrBlank()){
+                    binding.ptLat.setText(null)
+                    binding.ptLong.setText(null)
+               }
+
+               //Convertir ImageView en una array de bytes para poder guardar en SQLite
+               val bitmap = (binding.imgFoto.drawable as BitmapDrawable).bitmap
+               val stream = ByteArrayOutputStream()
+               bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
+               val img = stream.toByteArray()
+
+               //Crear sentencia SQLlite dependiendo del radioButton.Checked
+               if(binding.rbGasto.isChecked){
+                    moneyControlDB.anyaditMovi(binding.ptGasto.text.toString(), binding.ptFecha.toString(), binding.rbGasto.text.toString(),
+                        binding.spCategoria.toString(), binding.ptImporte.text.toString(), binding.ptLat.text.toString(),
+                        binding.ptLong.text.toString(), img)
+               }else{
+                   moneyControlDB.anyaditMovi(binding.ptGasto.text.toString(), binding.ptFecha.toString(), binding.rbIngreso.text.toString(),
+                       binding.spCategoria.toString(), binding.ptImporte.text.toString(), binding.ptLat.text.toString(),
+                       binding.ptLong.text.toString(), img)
+               }
+           }//if_radioGroup
+        }//if_titulo/fecha/importe
+
 
     }//end_crearMovimiento
 
