@@ -13,15 +13,15 @@ class miSQLiteHelper(context: Context) : SQLiteOpenHelper(
     context,"moneyControl.db", null, 1) {
     override fun onCreate(db: SQLiteDatabase?) {
         val  createCate = "CREATE TABLE IF NOT EXISTS categoria " +
-                "(categoria TEXT PRIMARY KEY)"
+                "(categoria TEXT PRIMARY KEY);"
 
         val createMovimiento = "CREATE TABLE IF NOT EXISTS movimiento" +
-                "(_id INT PRIMARY KEY AUTOINCREMENT, titulo TEXT NOT NULL, fecha DATE NOT NULL," +
-                "tipo TEXT NOT NULL, cate TEXT NOT NULL, importe FLOAT NOT NULL, " +
-                "latitud FLOAT, longitud FLOAT, recibo BLOB)"
+                "(_id INT PRIMARY KEY AUTOINCREMENT, titulo TEXT, fecha DATE, " +
+                "tipo TEXT, cate TEXT, importe TEXT, " +
+                "latitud TEXT, longitud TEXT, recibo BLOB);"
 
         db!!.execSQL(createCate)
-        db!!.execSQL(createMovimiento)
+        db.execSQL(createMovimiento)
     }//onCreate
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion1: Int, newVersion2: Int) {

@@ -2,6 +2,7 @@ package edu.jordivicent.mywonderfulmoneycontrol
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,8 @@ import android.widget.Button
 import android.widget.Spinner
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import edu.jordivicent.mywonderfulmoneycontrol.Utils.AdapterMovimiento
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.miSQLiteHelper
 import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMainBinding
 import java.util.jar.Manifest
@@ -17,6 +20,7 @@ import java.util.jar.Manifest
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     lateinit var moneyControlDB: miSQLiteHelper
+    private lateinit var db: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +36,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(myIntent)
         }//btAdd_setOnClickListener
 
+
         verPermisos()
         compCategoriaSql()
+        //movimientoSql()
 
     }//end_OnCreate
 
@@ -62,7 +68,7 @@ class MainActivity : AppCompatActivity() {
     private fun compCategoriaSql(){
         var category: MutableList<String> = ArrayList()
         val filtroCat = binding.spFiltroCat
-        val db : SQLiteDatabase = moneyControlDB.readableDatabase
+        db = moneyControlDB.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM categoria", null)
 
         //Si la tabla tiene datos, mostrara los datos
@@ -101,5 +107,22 @@ class MainActivity : AppCompatActivity() {
             }//end_if
         }//end_else
     }//end_compCategSQL
+
+    private fun movimientoSql() {
+        db = moneyControlDB.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM movimiento", null)
+
+        val adaptador = AdapterMovimiento()
+        adaptador.RecyclerViewMovimiento(this, cursor)
+
+        binding.rvMovimientos.setHasFixedSize(true)
+        binding.rvMovimientos.layoutManager = LinearLayoutManager(this)
+        binding.rvMovimientos.adapter=adaptador
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        db.close()
+    }
 
 }

@@ -159,6 +159,7 @@ class activity_Movimiento : AppCompatActivity() {
                //Convertir ImageView en una array de bytes para poder guardar en SQLite
                val bitmap = (binding.imgFoto.drawable as BitmapDrawable).bitmap
                val stream = ByteArrayOutputStream()
+
                bitmap.compress(Bitmap.CompressFormat.PNG, 90, stream)
                val img = stream.toByteArray()
 
@@ -172,10 +173,25 @@ class activity_Movimiento : AppCompatActivity() {
                        binding.spCategoria.toString(), binding.ptImporte.text.toString(), binding.ptLat.text.toString(),
                        binding.ptLong.text.toString(), img)
                }
+
            }//if_radioGroup
         }//if_titulo/fecha/importe
 
+        clearAll()
+        val myIntent = Intent(this, MainActivity::class.java)
+        startActivity(myIntent)
 
     }//end_crearMovimiento
+
+    fun clearAll(){
+        binding.ptGasto.text.clear()
+        binding.ptFecha.text.clear()
+        binding.ptLat.text.clear()
+        binding.ptLong.text.clear()
+        binding.ptImporte.text.clear()
+        binding.rbGasto.isChecked = false
+        binding.rbIngreso.isChecked = false
+        binding.imgFoto.setImageDrawable(null)
+    }
 
 }//end_activityMovimiento
