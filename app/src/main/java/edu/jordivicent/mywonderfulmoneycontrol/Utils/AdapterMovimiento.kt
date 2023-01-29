@@ -15,10 +15,11 @@ import edu.jordivicent.mywonderfulmoneycontrol.R
 import edu.jordivicent.mywonderfulmoneycontrol.databinding.ListaMovimientosBinding
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-
+/*
 class AdapterMovimiento : RecyclerView.Adapter<AdapterMovimiento.ViewHolder>(){
     lateinit var context: Context
     lateinit var cursor: Cursor
+
 
     fun RecyclerViewMovimiento(context: Context, cursor: Cursor){
         this.context = context
@@ -64,8 +65,7 @@ class AdapterMovimiento : RecyclerView.Adapter<AdapterMovimiento.ViewHolder>(){
         val etLat: TextView
         val imgFoto: ImageView
 
-
-        constructor(view: View) : super (view){
+      constructor(view: View) : super (view){
             val bindingItem = ListaMovimientosBinding.bind(view)
             etTitulo = bindingItem.etTItulo
             etFecha = bindingItem.etFecha
@@ -76,7 +76,10 @@ class AdapterMovimiento : RecyclerView.Adapter<AdapterMovimiento.ViewHolder>(){
             etLong =bindingItem.etLong
             imgFoto = bindingItem.imgFoto
         }
+
+
     }
 
 
 }
+*/

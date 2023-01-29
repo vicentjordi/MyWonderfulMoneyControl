@@ -12,7 +12,7 @@ import android.widget.Spinner
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import edu.jordivicent.mywonderfulmoneycontrol.Utils.AdapterMovimiento
+//import edu.jordivicent.mywonderfulmoneycontrol.Utils.AdapterMovimiento
 import edu.jordivicent.mywonderfulmoneycontrol.Utils.miSQLiteHelper
 import edu.jordivicent.mywonderfulmoneycontrol.databinding.ActivityMainBinding
 import java.util.jar.Manifest
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         moneyControlDB = miSQLiteHelper(this)
 
-        binding.btAdd.setOnClickListener{
+        binding.btnAdd.setOnClickListener{
             val myIntent = Intent(this, activity_Movimiento::class.java)
 
             startActivity(myIntent)
@@ -112,12 +112,12 @@ class MainActivity : AppCompatActivity() {
         db = moneyControlDB.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM movimiento", null)
 
-        val adaptador = AdapterMovimiento()
-        adaptador.RecyclerViewMovimiento(this, cursor)
+        //val adaptador = AdapterMovimiento()
+       // adaptador.RecyclerViewMovimiento(this, cursor)
 
         binding.rvMovimientos.setHasFixedSize(true)
         binding.rvMovimientos.layoutManager = LinearLayoutManager(this)
-        binding.rvMovimientos.adapter=adaptador
+        //binding.rvMovimientos.adapter=adaptador
     }
 
     override fun onDestroy() {
