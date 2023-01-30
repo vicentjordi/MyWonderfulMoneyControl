@@ -56,7 +56,7 @@ class activity_Movimiento : AppCompatActivity() {
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
         //Funciones botones
-        binding.btLocate.setOnClickListener{locateMe()}//End_locate
+        binding.btnLocate.setOnClickListener{locateMe()}//End_locate
         binding.btnFoto.setOnClickListener{
             //Crear Intent camara
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -64,8 +64,8 @@ class activity_Movimiento : AppCompatActivity() {
             camaraLauncher.launch(intent)
         }//end_foto
         binding.ptFecha.setOnClickListener{selectorFecha()}//end_fecha
-        binding.btAddCate.setOnClickListener{addCategoria()}
-        binding.btnCrear.setOnClickListener{crearMovimiento()}//end_crear
+        binding.btnAddCate.setOnClickListener{addCategoria()}
+       // binding.btnCrear.setOnClickListener{crearMovimiento()}//end_crear
 
     }//end_OnCreate
     private fun locateMe(){
@@ -81,15 +81,18 @@ class activity_Movimiento : AppCompatActivity() {
             return
         }
 
+        /*
         fusedLocation.lastLocation.addOnSuccessListener { location ->
             //Comprobar si location es null
             if (location != null) {
                 //Pone la latitud
-                binding.ptLat.setText(location.latitude.toString())
+               binding.ptLat.setText(location.latitude.toString())
                 //Pone la Longitud
                 binding.ptLong.setText((location.longitude.toString()))
             }
         }//end_fusedLocation
+        */
+
     }//end_locateMe
     private fun selectorFecha(){
         val datePicker = DatePickerFragment{day, month, year -> onDateSelected(day, month, year)}
@@ -145,16 +148,19 @@ class activity_Movimiento : AppCompatActivity() {
             show()
         }//endWith
     }//end_addCategoria
-    private fun crearMovimiento(){
+
+    /*
+        private fun crearMovimiento(){
         //Comprobar que los campos principales no esten vacios
         if(!binding.ptGasto.text.isNullOrBlank() && !binding.ptFecha.text.isNullOrBlank() && !binding.ptImporte.text.isNullOrBlank()){
 
-           if(binding.radioGroup.checkedRadioButtonId==-1){
+            if(binding.radioGroup.checkedRadioButtonId==-1){
                //Comprobar que los campos Latitud y longitud no esten vacio
                if(binding.ptLat.text.isNullOrBlank()){
                     binding.ptLat.setText(null)
                     binding.ptLong.setText(null)
                }
+
 
                //Convertir ImageView en una array de bytes para poder guardar en SQLite
                val bitmap = (binding.imgFoto.drawable as BitmapDrawable).bitmap
@@ -182,12 +188,13 @@ class activity_Movimiento : AppCompatActivity() {
         startActivity(myIntent)
 
     }//end_crearMovimiento
+    * */
 
     fun clearAll(){
         binding.ptGasto.text.clear()
         binding.ptFecha.text.clear()
-        binding.ptLat.text.clear()
-        binding.ptLong.text.clear()
+       // binding.ptLat.text.clear()
+       // binding.ptLong.text.clear()
         binding.ptImporte.text.clear()
         binding.rbGasto.isChecked = false
         binding.rbIngreso.isChecked = false

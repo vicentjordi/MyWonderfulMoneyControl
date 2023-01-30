@@ -16,7 +16,7 @@
     <string name="tvCategoria">Categoria</string>
     <string name="tvTipo">Tipo de Movimiento</string>
     <string name="tvImporte">Importe</string>
-    <string name="tvLocalizacion">Locate</string>
+    <string name="tvLocalizacion">Localizar</string>
 
     <string name="tvFoto">Foto Recibo</string>
     <string name="lblTipo">Tipo: </string>

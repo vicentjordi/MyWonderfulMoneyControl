@@ -7,196 +7,152 @@
     tools:context=".activity_Movimiento">
 
     <EditText
-        android:id="@+id/ptGasto"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="122dp"
-        android:ems="10"
-        android:hint="@string/rbGasto"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/ptGasto"
+        android:hint="@string/tvGasto"
+        android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/ptFecha"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="121dp"
-        android:clickable="false"
-        android:ems="10"
-        android:focusable="false"
+        android:id="@+id/ptFecha"
         android:hint="@string/tvFecha"
-        android:inputType="textPersonName"
+        android:layout_marginRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/ptImporte"
+        android:hint="@string/tvImporte"
+        android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptGasto"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+        android:layout_marginRight="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/ptGasto" />
 
     <TextView
-        android:id="@+id/tvMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="26dp"
+        android:id="@+id/lblTipo"
         android:text="@string/tvTipo"
         android:textStyle="bold"
+        android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptFecha" />
-
-    <TextView
-        android:id="@+id/tvCategoria"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="80dp"
-        android:text="@string/tvCategoria"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvMovimiento"
-        app:layout_constraintTop_toBottomOf="@+id/ptFecha" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/ptImporte"/>
 
     <RadioGroup
-        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="15dp"
+        android:id="@+id/radioGroup"
+        android:layout_marginLeft="50dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMovimiento">
+        app:layout_constraintTop_toBottomOf="@id/lblTipo">
 
         <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/rbIngreso"
-            android:layout_width="100sp"
-            android:layout_height="wrap_content"
-            android:text="@string/rbIngreso" />
+            android:text="@string/rbIngreso"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup" />
 
         <RadioButton
-            android:id="@+id/rbGasto"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rbGasto" />
+            android:id="@+id/rbGasto"
+            android:text="@string/rbGasto"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/radioGroup" />
+
     </RadioGroup>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbCategoria"
+        android:text="@string/tvCategoria"
+        android:textStyle="bold"
+        android:layout_marginRight="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/ptImporte"/>
+
     <Spinner
+        android:layout_width="125dp"
+        android:layout_height="25dp"
         android:id="@+id/spCategoria"
-        android:layout_width="130dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/tvCategoria"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
-
-    <EditText
-        android:id="@+id/ptImporte"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/lbCategoria" />
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginEnd="120dp"
-        android:ems="10"
-        android:hint="@string/tvImporte"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-
-    <ImageView
-        android:id="@+id/imgFoto"
-        android:layout_width="149dp"
-        android:layout_height="122dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCrear"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnFoto"
-        app:layout_constraintTop_toBottomOf="@+id/ptLat"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
-    <Button
-        android:id="@+id/btnCrear"
-        android:layout_width="85dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="319dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/btnCrear"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/btLocate"
-        android:layout_width="103dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="11dp"
-        android:text="@string/tvLocalizacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ptImporte" />
-
-    <Button
-        android:id="@+id/btAddCate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
+        android:id="@+id/btnAddCate"
         android:text="@string/btCate"
+        android:layout_marginRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/spCategoria" />
-
-    <EditText
-        android:id="@+id/ptLat"
-        android:layout_width="125dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="numberDecimal"
-        app:layout_constraintStart_toEndOf="@+id/btLocate"
-        app:layout_constraintTop_toBottomOf="@+id/ptImporte" />
-
-    <EditText
-        android:id="@+id/ptLong"
-        android:layout_width="125dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginEnd="5dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ptLat"
-        app:layout_constraintTop_toBottomOf="@+id/ptImporte" />
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/spCategoria"/>
 
     <Button
-        android:id="@+id/btnFoto"
-        android:layout_width="116dp"
-        android:layout_height="62dp"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="100dp"
-        android:text="@string/tvFoto"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLocate"
+        android:text="@string/tvLocalizacion"
+        android:layout_marginLeft="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btLocate" />
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+
+    <com.google.android.gms.maps.MapView
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/mapView"
+        android:layout_marginLeft="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/btnLocate" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnFoto"
+        android:text="@string/tvFoto"
+        android:layout_marginRight="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:layout_width="125dp"
+        android:layout_height="150dp"
+        android:id="@+id/imgFoto"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:layout_marginRight="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/btnFoto"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCrear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_save"
+        android:clickable="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
