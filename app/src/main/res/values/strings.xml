@@ -25,8 +25,13 @@
 
     <!-- Dialog, Snackbar, Toast -->
     <string name="etNueva">Nueva Categoria</string>
+    <string name="btnAceptar">Aceptar</string>
+    <string name="btnCacelar">Cancelar</string>
+    <string name="CancelarCate">Se ha cancelado la operació,</string>
 
     <!-- Control de Errores -->
+    <string name="errorGuardar">Error al Guardar</string>
+    <string name="errorProblema">No se puede guardar si hay campos vacios a excepción de la Foto y localización</string>
 
 
 </resources>
